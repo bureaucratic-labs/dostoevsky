@@ -10,7 +10,7 @@ from dostoevsky.word_vectors import (
     Word2VecContainer,
 )
 from dostoevsky.corpora import RusentimentCorpus
-from dostoevsky.data import DataDownloader
+from dostoevsky.data import DataDownloader, DATA_BASE_PATH
 
 
 @pytest.fixture
@@ -36,7 +36,7 @@ def word_vectors_path(data_downloader) -> str:
     )
     assert filesize > 0
     return os.path.join(
-        data_downloader.DATA_BASE_PATH,
+        DATA_BASE_PATH,
         'embeddings/vk-min-100-300d-none-limited.vec',
     )
 
@@ -65,7 +65,7 @@ def rusentiment_corpus_data(data_downloader):
     )
     assert filesize > 0
     return os.path.join(
-        data_downloader.DATA_BASE_PATH,
+        DATA_BASE_PATH,
         'corpora/',
     )
 

@@ -14,8 +14,8 @@ class DataDownloader:
     CHUNK_SIZE: int = 1024 * 32
 
     def download(self, source: str, destination: str) -> int:
-        destination_path: str = os.path.join(self.DATA_BASE_PATH, destination)
-        url: str = os.path.join(self.STORAGE_BASE_URL, source)
+        destination_path: str = os.path.join(DATA_BASE_PATH, destination)
+        url: str = os.path.join(STORAGE_BASE_URL, source)
         request = urllib.request.Request(url)
         request.add_header('User-Agent', self.USERAGENT)
         response = urllib.request.urlopen(request)

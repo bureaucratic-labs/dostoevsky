@@ -1,7 +1,11 @@
+import os
 from typing import List, Tuple
 
 from numpy import zeros
 from gensim.models import KeyedVectors, FastText
+
+
+from dostoevsky.data import DATA_BASE_PATH
 
 
 class BaseWordVectorsContainer:
@@ -49,3 +53,20 @@ class FastTextContainer(BaseWordVectorsContainer):
     def get_vectors(self, **kwargs):
         model = FastText.load(self.model_path, **kwargs)
         return model
+
+
+class SocialNetworkWordVectores(Word2VecContainer):
+
+    MODEL_PATH: str = 'embeddings/vk-min-100-300d-none.vec'
+    DIMENSION: int = 300
+
+    def __init__(self, **kwargs):
+        super(SocialNetworkWordVectores, self).__init__(
+            model_path=os.path.join(
+                DATA_BASE_PATH,
+                self.MODEL_PATH,
+            ),
+            dimension=self.DIMENSION,
+            append_pos=False,
+            **kwargs,
+        )
