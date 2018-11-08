@@ -1,47 +1,8 @@
-absl-py==0.6.1
-astor==0.7.1
-atomicwrites==1.2.1
-attrs==18.2.0
-b-labs-models==2017.8.22
-boto==2.49.0
-boto3==1.9.40
-botocore==1.12.40
-bz2file==0.98
-certifi==2018.10.15
-chardet==3.0.4
-DAWG-Python==0.7.2
-docopt==0.6.2
-docutils==0.14
-gast==0.2.0
-gensim==3.6.0
-grpcio==1.16.0
-h5py==2.8.0
-idna==2.7
-jmespath==0.9.3
-Keras==2.2.4
-Keras-Applications==1.0.6
-Keras-Preprocessing==1.0.5
-Markdown==3.0.1
-more-itertools==4.3.0
-numpy==1.15.4
-pluggy==0.8.0
-protobuf==3.6.1
-py==1.7.0
-pymorphy2==0.8
-pymorphy2-dicts==2.4.393442.3710985
-pytest==3.10.0
-python-crfsuite==0.9.6
-python-dateutil==2.7.5
-PyYAML==3.13
-requests==2.20.1
-russian-tagsets==0.6
-s3transfer==0.1.13
-scikit-learn==0.20.0
-scipy==1.1.0
-six==1.11.0
-smart-open==1.7.1
-tensorboard==1.12.0
-tensorflow==1.12.0
-termcolor==1.1.0
-urllib3==1.24.1
-Werkzeug==0.14.1
+b-labs-models == 2017.8.22
+gensim == 3.6.0
+Keras == 2.2.4
+pymorphy2 == 0.8
+pytest == 3.10.0
+russian-tagsets == 0.6
+scikit-learn == 0.20.0
+tensorflow == 1.12.0
