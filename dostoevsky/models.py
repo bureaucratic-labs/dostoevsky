@@ -1,3 +1,5 @@
+import os
+
 from typing import List, Optional
 
 from keras.models import Model, load_model
@@ -8,7 +10,8 @@ from keras.preprocessing.sequence import pad_sequences
 
 from dostoevsky.tokenization import BaseTokenizer
 from dostoevsky.word_vectors import BaseWordVectorsContainer
-from dostoevsky.corpora import RusentimentCorpus
+from dostoevsky.corpora import BaseCorpusContainer, RusentimentCorpus
+from dostoevsky.data import DATA_BASE_PATH
 
 
 class BaseModel:
@@ -20,18 +23,14 @@ class BaseModel:
         word_vectors_container: BaseWordVectorsContainer,
         lemmatize: bool = True,
         model_path: Optional[str] = None,
+        corpus: Optional[BaseCorpusContainer] = None,
     ):
         self.model_path = model_path
         self.sentence_length = sentence_length
         self.tokenizer = tokenizer
         self.word_vectors_container = word_vectors_container
         self.lemmatize = lemmatize
-        self.corpus = RusentimentCorpus(
-            data_path=None,
-            tokenizer=tokenizer,
-            word_vectors_container=word_vectors_container,
-            lemmatize=lemmatize,
-        )
+        self.corpus = corpus
         self.model = (
             self.get_compiled_model()
             if self.model_path
@@ -47,7 +46,7 @@ class BaseModel:
                 self.tokenizer.split(sentence, lemmatize=self.lemmatize)
             ) for sentence in sentences
         ], maxlen=self.sentence_length, dtype='float32')
-        Y = self.model.fit(X)
+        Y = self.model.predict(X)
         labels: List[str] = (
             self
             .corpus
@@ -106,7 +105,10 @@ class SocialNetworkModel(BaseCNNModel):
     '''
 
     SENTENCE_LENGTH: int = 60
-    MODEL_PATH: str = 'data/models/cnn-social-network-model.hdf5'
+    MODEL_PATH: str = os.path.join(
+        DATA_BASE_PATH,
+        'models/cnn-social-network-model.hdf5'
+    )
 
     def __init__(
         self,
@@ -120,4 +122,10 @@ class SocialNetworkModel(BaseCNNModel):
             word_vectors_container=word_vectors_container,
             lemmatize=lemmatize,
             model_path=self.MODEL_PATH,
+            corpus=RusentimentCorpus(
+                data_path=None,
+                tokenizer=tokenizer,
+                word_vectors_container=word_vectors_container,
+                lemmatize=lemmatize,
+            )
         )

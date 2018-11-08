@@ -15,7 +15,7 @@ class BaseCorpusContainer:
         raise NotImplementedError
 
 
-class RusentimentCorpus:
+class RusentimentCorpus(BaseCorpusContainer):
 
     CSV_DELIMITER: str = ','
     CSV_QUOTECHAR: str = '"'

@@ -4,11 +4,13 @@ import tarfile
 import urllib.request
 
 
+DATA_BASE_PATH: str = os.path.dirname(os.path.abspath(__file__))
+STORAGE_BASE_URL: str = 'https://storage.b-labs.pro/'
+
+
 class DataDownloader:
 
     USERAGENT: str = 'Dostoevsky / 1.0'
-    STORAGE_BASE_URL: str = 'https://storage.b-labs.pro/'
-    DATA_BASE_PATH: str = os.path.dirname(os.path.abspath(__file__))
     CHUNK_SIZE: int = 1024 * 32
 
     def download(self, source: str, destination: str) -> int:
