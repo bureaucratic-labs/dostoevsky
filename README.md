@@ -26,21 +26,15 @@ Then, we can build our pipeline: `text -> tokenizer -> word embeddings -> CNN`
 
 ```python
 from dostoevsky.tokenization import UDBaselineTokenizer
-from dostoevsky.word_vectors import Word2VecContainer
-from dostoevsky.corpora import RusentimentCorpus
-from dostoevsky.data import VK_WORD_VECTORES_PATH, VK_WORD_VECTORES_DIMENSION
+from dostoevsky.word_vectors import SocialNetworkWordVectores
 from dostoevsky.models import SocialNetworkModel
 
 tokenizer = UDBaselineTokenizer()
-tokenizer.split('всё очень плохо')  # [('всё', 'ADJ'), ('очень', 'ADV'), ('плохо', 'ADV')]
+tokens = tokenizer.split('всё очень плохо')  # [('всё', 'ADJ'), ('очень', 'ADV'), ('плохо', 'ADV')]
 
-word_vectors_container = Word2VecContainer(
-  model_path=VK_WORD_VECTORES_PATH,
-  dimension=VK_WORD_VECTORES_DIMENSION,
-  append_pos=False,  # our embeddings doesn't have an POS suffix (like RusVectores have)
-)
+word_vectors_container = SocialNetworkWordVectores()
 
-vectors = word_vectors.get_word_vectors(tokens)
+vectors = word_vectors_container.get_word_vectors(tokens)
 vectors.shape  # (3, 300) - three words/vectors with dim=300
 
 model = SocialNetworkModel(
