@@ -40,7 +40,7 @@ class BaseModel:
     def get_compiled_model(self):
         return load_model(self.model_path)
 
-    def fit(self, sentences: List[str]) -> List[str]:
+    def predict(self, sentences: List[str]) -> List[str]:
         X = pad_sequences([
             self.word_vectors_container.get_word_vectors(
                 self.tokenizer.split(sentence, lemmatize=self.lemmatize)
