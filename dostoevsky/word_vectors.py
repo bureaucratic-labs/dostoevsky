@@ -1,7 +1,7 @@
 import os
 from typing import List, Tuple
 
-from numpy import zeros
+from numpy import array, zeros
 from gensim.models import KeyedVectors, FastText
 
 
@@ -29,7 +29,7 @@ class BaseWordVectorsContainer:
     def get_word_vectors(self, tokens: List[Tuple[str, str]]) -> List[
         List[float]
     ]:
-        return [
+        return array([
             self.vectors[f'{word}_{pos}'] if (
                 f'{word}_{pos}' in self.vectors
             ) else self.unknown_word_vector for word, pos in tokens
@@ -37,7 +37,7 @@ class BaseWordVectorsContainer:
             self.vectors[word] if (
                 word in self.vectors
             ) else self.unknown_word_vector for word, _ in tokens
-        ]
+        ])
 
 
 class Word2VecContainer(BaseWordVectorsContainer):
