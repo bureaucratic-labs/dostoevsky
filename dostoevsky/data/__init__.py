@@ -1,11 +1,18 @@
 import os
 import lzma
+import typing
 import tarfile
 import urllib.request
 
 
 DATA_BASE_PATH: str = os.path.dirname(os.path.abspath(__file__))
 STORAGE_BASE_URL: str = 'https://storage.b-labs.pro/'
+
+
+AVAILABLE_FILES: typing.Dict[str, typing.Tuple[str, str]] = {
+    'vk-embeddings': ('embeddings/vk-min-100-300d-none.tar.xz', 'embeddings/vk-min-100-300d-none.tar.xz'),
+    'cnn-social-network-model': ('models/cnn-social-network-model.tar.xz', 'models/cnn-social-network-model.tar.xz')
+}
 
 
 class DataDownloader:
@@ -31,6 +38,4 @@ class DataDownloader:
         with lzma.open(destination_path) as f:
             with tarfile.open(fileobj=f) as tar:
                 tar.extractall(os.path.dirname(destination_path))
-        # remove original file
-        os.remove(destination_path)
         return filesize

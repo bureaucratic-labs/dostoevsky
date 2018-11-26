@@ -99,3 +99,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# models stuff
+dostoevsky/data/models/*
+dostoevsky/data/embeddings/*
