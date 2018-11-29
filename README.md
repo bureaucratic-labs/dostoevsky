@@ -1,4 +1,7 @@
 # Dostoevsky [![Build Status](https://travis-ci.org/bureaucratic-labs/dostoevsky.svg?branch=master)](https://travis-ci.org/bureaucratic-labs/dostoevsky)
+
+<img align="right" src="https://i.imgur.com/uLMWPuL.png">
+
 Library for sentiment analysis of russian language
 
 Currently, contains only one model: for classification of social networks comments / text messengers messages
