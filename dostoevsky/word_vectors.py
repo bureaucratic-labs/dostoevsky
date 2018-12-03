@@ -23,11 +23,11 @@ class BaseWordVectorsContainer:
     def get_unknown_word_vector(self) -> List[float]:
         return zeros(self.dimension)
 
-    def get_vectors(self):
+    def get_vectors(self, **kwargs):
         raise NotImplementedError
 
     def get_word_vectors(self, tokens: List[Tuple[str, str]]) -> List[
-        List[float]
+        array
     ]:
         return array([
             self.vectors[f'{word}_{pos}'] if (
