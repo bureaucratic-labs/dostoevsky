@@ -8,7 +8,7 @@ Currently, contains only one model: for classification of social networks commen
 
 ## Install
 
-Please note that `Dostoevsky` supports only Python 3.6+
+Please note that `Dostoevsky` supports only Python 3.6 (3.7+ version'll be supported when tensorflow get it support, sorry)
 
 ```bash
 $ pip install dostoevsky
