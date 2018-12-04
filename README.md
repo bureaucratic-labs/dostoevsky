@@ -8,6 +8,8 @@ Currently, contains only one model: for classification of social networks commen
 
 ## Install
 
+Please note that `Dostoevsky` supports only Python 3.6+
+
 ```bash
 $ pip install dostoevsky
 ```
