@@ -5,14 +5,21 @@ from setuptools import (
 )
 
 
+def get_long_description() -> str:
+    with open('README.md') as source:
+        return source.read()
+
+
 setup(
     name='dostoevsky',
-    version='0.1.0',
+    version='0.1.2',
     description='Sentiment analysis library for russian language',
     url='https://github.com/bureaucratic-labs/dostoevsky',
     author='Bureaucratic Labs',
     author_email='hello@b-labs.pro',
     license='MIT',
+    long_description=get_long_description(),
+    long_description_content_type='text/markdown',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
@@ -34,6 +41,7 @@ setup(
             'data/models/*',
         ]
     },
+    scripts=['bin/dostoevsky'],
     install_requires=[
         'b-labs-models == 2017.8.22',
         'gensim == 3.6.0',
