@@ -4,8 +4,6 @@
 
 Library for sentiment analysis of russian language
 
-Currently, contains only one model: for classification of social networks comments / text messengers messages
-
 ## Install
 
 Please note that `Dostoevsky` supports only Python 3.6 (3.7+ version'll be supported when tensorflow get it support, sorry)
