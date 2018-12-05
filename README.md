@@ -1,4 +1,5 @@
 # Dostoevsky [![Build Status](https://travis-ci.org/bureaucratic-labs/dostoevsky.svg?branch=master)](https://travis-ci.org/bureaucratic-labs/dostoevsky)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbureaucratic-labs%2Fdostoevsky.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbureaucratic-labs%2Fdostoevsky?ref=badge_shield)
 
 <img align="right" src="https://i.imgur.com/uLMWPuL.png">
 
@@ -49,3 +50,7 @@ model = SocialNetworkModel(
 model.predict(['наступили на ногу', 'всё суперски'])  # array(['negative', 'positive'], dtype='<U8')
 
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbureaucratic-labs%2Fdostoevsky.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbureaucratic-labs%2Fdostoevsky?ref=badge_large)
