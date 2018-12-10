@@ -22,7 +22,7 @@ This model was trained on [RuSentiment dataset](https://github.com/text-machine-
 First of all, you'll need to download pretrained word embeddings and model:
 
 ```bash
-$ doestoevsky download vk-embeddings cnn-social-network-model
+$ dostoevsky download vk-embeddings cnn-social-network-model
 ```
 
 Then, we can build our pipeline: `text -> tokenizer -> word embeddings -> CNN`
