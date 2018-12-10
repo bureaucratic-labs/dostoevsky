@@ -2,7 +2,7 @@
 
 <img align="right" src="https://i.imgur.com/uLMWPuL.png">
 
-Library for sentiment analysis of russian language
+Sentiment analysis library for russian language
 
 ## Install
 
