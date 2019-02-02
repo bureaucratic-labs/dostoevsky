@@ -1,5 +1,5 @@
 b-labs-models == 2017.8.22
-gensim==3.7.0
+gensim==3.7.1
 Keras == 2.2.4
 pymorphy2 == 0.8
 pytest==4.2.0
