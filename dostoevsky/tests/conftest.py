@@ -5,8 +5,9 @@ import pytest
 from dostoevsky.tokenization import (
     BaselineTokenizer,
     UDBaselineTokenizer,
+    RegexTokenizer,
 )
-from dostoevsky.word_vectors import (
+from dostoevsky.embeddings import (
     Word2VecContainer,
 )
 from dostoevsky.corpora import RusentimentCorpus
@@ -23,13 +24,18 @@ def ud_baseline_tokenizer():
     return UDBaselineTokenizer()
 
 
+@pytest.fixture
+def regex_tokenizer():
+    return RegexTokenizer()
+
+
 @pytest.fixture(scope='session')
 def data_downloader():
     return DataDownloader()
 
 
 @pytest.fixture(scope='session')
-def word_vectors_path(data_downloader) -> str:
+def embeddings_path(data_downloader) -> str:
     filesize: int = data_downloader.download(
         'embeddings/vk-min-100-300d-none-limited.tar.xz',
         'embeddings/vk-min-100-300d-none-limited.tar.xz',
@@ -42,15 +48,15 @@ def word_vectors_path(data_downloader) -> str:
 
 
 @pytest.fixture(scope='session')
-def word_vectors_dimension() -> int:
+def embeddings_dimension() -> int:
     return 300
 
 
 @pytest.fixture(scope='session')
-def word_vectors_container(word_vectors_path, word_vectors_dimension):
+def embeddings_container(embeddings_path, embeddings_dimension):
     return Word2VecContainer(
-        model_path=word_vectors_path,
-        dimension=word_vectors_dimension,
+        model_path=embeddings_path,
+        dimension=embeddings_dimension,
         append_pos=False,
         binary=False,
         limit=1000,
@@ -89,12 +95,12 @@ def rusentiment_baseline_tokenizer():
 def rusentiment_corpus(
     rusentiment_corpus_path,
     rusentiment_baseline_tokenizer,
-    word_vectors_container,
+    embeddings_container,
 ):
     return RusentimentCorpus(
         data_path=rusentiment_corpus_path,
         tokenizer=rusentiment_baseline_tokenizer,
-        word_vectors_container=word_vectors_container,
+        embeddings_container=embeddings_container,
     )
 
 
@@ -102,10 +108,10 @@ def rusentiment_corpus(
 def rusentiment_test_corpus(
     rusentiment_test_corpus_path,
     rusentiment_baseline_tokenizer,
-    word_vectors_container,
+    embeddings_container,
 ):
     return RusentimentCorpus(
         data_path=rusentiment_test_corpus_path,
         tokenizer=rusentiment_baseline_tokenizer,
-        word_vectors_container=word_vectors_container,
+        embeddings_container=embeddings_container,
     )

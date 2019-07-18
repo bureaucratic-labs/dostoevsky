@@ -3,7 +3,7 @@ from keras.preprocessing.sequence import pad_sequences
 
 def test_rusentiment_corpus_get_prepared_data(
     rusentiment_corpus,
-    word_vectors_container,
+    embeddings_container,
 ):
     X_train, y_train = [], []
     for i, (vectors, label) in enumerate(
@@ -15,5 +15,5 @@ def test_rusentiment_corpus_get_prepared_data(
             break
     assert len(X_train) == len(y_train)
     assert pad_sequences(X_train, maxlen=60).shape == (
-        10, 60, word_vectors_container.dimension
+        10, 60, embeddings_container.dimension
     )

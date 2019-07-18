@@ -1,7 +1,7 @@
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 
-def test_baseline_tokenizer_simple_case(baseline_tokenizer):
+def test_baseline_tokenizer_base_case(baseline_tokenizer):
     tokens: List[
         Tuple[str, str]
     ] = baseline_tokenizer.split('он приехал домой')
@@ -63,4 +63,26 @@ def test_ud_baseline_tokenizer_with_unknown_word(ud_baseline_tokenizer):
     ] = ud_baseline_tokenizer.split('asdasdasde21e')
     assert tokens == [
         ('asdasdasde21e', 'X'),
+    ]
+
+
+def test_regex_tokenizer_base_case(regex_tokenizer):
+    tokens: List[
+        Tuple[str, Optional[str]]
+    ] = regex_tokenizer.split('он приехал домой')
+    assert tokens == [
+        ('он', None),
+        ('приехал', None),
+        ('домой', None),
+    ]
+
+
+def test_regex_tokenizer_lower_case(regex_tokenizer):
+    tokens: List[
+        Tuple[str, Optional[str]]
+    ] = regex_tokenizer.split('оН пРиехал доМой')
+    assert tokens == [
+        ('он', None),
+        ('приехал', None),
+        ('домой', None),
     ]

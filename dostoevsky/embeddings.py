@@ -1,5 +1,5 @@
 import os
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 from numpy import array, zeros
 from gensim.models import KeyedVectors, FastText
@@ -8,9 +8,9 @@ from gensim.models import KeyedVectors, FastText
 from dostoevsky.data import DATA_BASE_PATH
 
 
-class BaseWordVectorsContainer:
+class BaseEmbeddingsContainer:
     '''
-    Base interface for class, that returns vector representations of given words
+    Base interface for class, that returns vector representations of given words.
     '''
 
     def __init__(self, model_path: str, dimension: int, append_pos: bool = True, **kwargs):
@@ -26,7 +26,7 @@ class BaseWordVectorsContainer:
     def get_vectors(self, **kwargs):
         raise NotImplementedError
 
-    def get_word_vectors(self, tokens: List[Tuple[str, str]]) -> List[
+    def get_word_vectors(self, tokens: List[Tuple[str, Optional[str]]]) -> List[
         array
     ]:
         return array([
@@ -40,7 +40,7 @@ class BaseWordVectorsContainer:
         ])
 
 
-class Word2VecContainer(BaseWordVectorsContainer):
+class Word2VecContainer(BaseEmbeddingsContainer):
 
     def get_vectors(self, **kwargs):
         model = KeyedVectors.load_word2vec_format(self.model_path, **kwargs)
@@ -48,20 +48,20 @@ class Word2VecContainer(BaseWordVectorsContainer):
         return model
 
 
-class FastTextContainer(BaseWordVectorsContainer):
+class FastTextContainer(BaseEmbeddingsContainer):
 
     def get_vectors(self, **kwargs):
         model = FastText.load(self.model_path, **kwargs)
         return model
 
 
-class SocialNetworkWordVectores(Word2VecContainer):
+class SocialNetworkEmbeddings(Word2VecContainer):
 
     MODEL_PATH: str = 'embeddings/vk-min-100-300d-none.vec'
     DIMENSION: int = 300
 
     def __init__(self, **kwargs):
-        super(SocialNetworkWordVectores, self).__init__(
+        super(SocialNetworkEmbeddings, self).__init__(
             model_path=os.path.join(
                 DATA_BASE_PATH,
                 self.MODEL_PATH,

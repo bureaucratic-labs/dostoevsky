@@ -9,7 +9,7 @@ from keras.layers.pooling import GlobalMaxPooling1D
 from keras.preprocessing.sequence import pad_sequences
 
 from dostoevsky.tokenization import BaseTokenizer
-from dostoevsky.word_vectors import BaseWordVectorsContainer
+from dostoevsky.embeddings import BaseEmbeddingsContainer
 from dostoevsky.corpora import BaseCorpusContainer, RusentimentCorpus
 from dostoevsky.data import DATA_BASE_PATH
 
@@ -20,7 +20,7 @@ class BaseModel:
         self,
         sentence_length: int,
         tokenizer: BaseTokenizer,
-        word_vectors_container: BaseWordVectorsContainer,
+        embeddings_container: BaseEmbeddingsContainer,
         lemmatize: bool = True,
         model_path: Optional[str] = None,
         corpus: Optional[BaseCorpusContainer] = None,
@@ -28,7 +28,7 @@ class BaseModel:
         self.model_path = model_path
         self.sentence_length = sentence_length
         self.tokenizer = tokenizer
-        self.word_vectors_container = word_vectors_container
+        self.embeddings_container = embeddings_container
         self.lemmatize = lemmatize
         self.corpus = corpus
         self.model = (
@@ -42,7 +42,7 @@ class BaseModel:
 
     def predict(self, sentences: List[str]) -> List[str]:
         X = pad_sequences([
-            self.word_vectors_container.get_word_vectors(
+            self.embeddings_container.get_word_vectors(
                 self.tokenizer.split(sentence, lemmatize=self.lemmatize)
             ) for sentence in sentences
         ], maxlen=self.sentence_length, dtype='float32')
@@ -68,7 +68,7 @@ class BaseCNNModel(BaseModel):
         branches = []
         tweet_input = Input(shape=(
             self.sentence_length,
-            self.word_vectors_container.dimension
+            self.embeddings_container.dimension
         ), dtype='float32')
         x = Dropout(0.2)(tweet_input)
 
@@ -113,19 +113,19 @@ class SocialNetworkModel(BaseCNNModel):
     def __init__(
         self,
         tokenizer: BaseTokenizer,
-        word_vectors_container: BaseWordVectorsContainer,
+        embeddings_container: BaseEmbeddingsContainer,
         lemmatize: bool = False,
     ):
         super(SocialNetworkModel, self).__init__(
             sentence_length=self.SENTENCE_LENGTH,
             tokenizer=tokenizer,
-            word_vectors_container=word_vectors_container,
+            embeddings_container=embeddings_container,
             lemmatize=lemmatize,
             model_path=self.MODEL_PATH,
             corpus=RusentimentCorpus(
                 data_path=None,
                 tokenizer=tokenizer,
-                word_vectors_container=word_vectors_container,
+                embeddings_container=embeddings_container,
                 lemmatize=lemmatize,
             )
         )

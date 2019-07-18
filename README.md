@@ -6,7 +6,7 @@ Sentiment analysis library for russian language
 
 ## Install
 
-Please note that `Dostoevsky` supports only Python 3.6 (3.7+ version'll be supported when tensorflow get it support, sorry)
+Please note that `Dostoevsky` supports only Python 3.6+
 
 ```bash
 $ pip install dostoevsky
@@ -28,26 +28,33 @@ $ dostoevsky download vk-embeddings cnn-social-network-model
 Then, we can build our pipeline: `text -> tokenizer -> word embeddings -> CNN`
 
 ```python
-from dostoevsky.tokenization import UDBaselineTokenizer
-from dostoevsky.word_vectors import SocialNetworkWordVectores
+from dostoevsky.tokenization import UDBaselineTokenizer, RegexTokenizer
+from dostoevsky.embeddings import SocialNetworkEmbeddings
 from dostoevsky.models import SocialNetworkModel
 
-tokenizer = UDBaselineTokenizer()
+tokenizer = UDBaselineTokenizer() or RegexTokenizer()
 tokens = tokenizer.split('всё очень плохо')  # [('всё', 'ADJ'), ('очень', 'ADV'), ('плохо', 'ADV')]
 
-word_vectors_container = SocialNetworkWordVectores()
+embeddings_container = SocialNetworkEmbeddings()
 
-vectors = word_vectors_container.get_word_vectors(tokens)
+vectors = embeddings_container.get_word_vectors(tokens)
 vectors.shape  # (3, 300) - three words/vectors with dim=300
 
 model = SocialNetworkModel(
   tokenizer=tokenizer,
-  word_vectors_container=word_vectors_container,
+  embeddings_container=embeddings_container,
   lemmatize=False,
 )
 
-model.predict(['наступили на ногу', 'всё суперски'])  # array(['negative', 'positive'], dtype='<U8')
+messages = [
+    'наступили на ногу',
+    'всё суперски',
+]
 
+results = model.predict(messages)
+
+for message, sentiment in zip(messages, results):
+    print(message, '->', sentiment)  # наступили на ногу -> negative
 ```
 
 

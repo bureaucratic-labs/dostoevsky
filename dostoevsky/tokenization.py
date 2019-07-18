@@ -1,6 +1,7 @@
-from typing import List, Tuple, Set
+from typing import List, Tuple, Set, Optional
 
 from pymorphy2 import MorphAnalyzer
+from razdel import tokenize as regex_tokenize
 from b_labs_models import Tokenizer, POSTagger
 from russian_tagsets import converters
 
@@ -14,7 +15,7 @@ class BaseTokenizer:
     '''
 
     def split(self, text: str, lemmatize: bool = True) -> List[
-        Tuple[str, str]
+        Tuple[str, Optional[str]]
     ]:
         '''
         Each subclass of BaseTokenizer must inplement this method
@@ -22,6 +23,21 @@ class BaseTokenizer:
         [('приехать', 'VERB'), ('дом', 'NOUN')]
         '''
         raise NotImplementedError
+
+
+class RegexTokenizer(BaseTokenizer):
+    '''
+    Tokenizer based on one of most accurate and fast tokenizers for russian
+    language text - razdel. This tokenizer doesn't performs POS tagging
+    and lemmatization.
+    '''
+
+    def split(self, text: str, lemmatize: bool = False) -> List[
+        Tuple[str, Optional[str]]
+    ]:
+        return [
+            (token.text.lower(), None) for token in regex_tokenize(text)
+        ]
 
 
 class BaselineTokenizer(BaseTokenizer):

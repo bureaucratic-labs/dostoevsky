@@ -6,7 +6,7 @@ from sklearn.preprocessing import LabelBinarizer
 
 
 from dostoevsky.tokenization import BaseTokenizer
-from dostoevsky.word_vectors import BaseWordVectorsContainer
+from dostoevsky.embeddings import BaseEmbeddingsContainer
 
 
 class BaseCorpusContainer:
@@ -35,13 +35,13 @@ class RusentimentCorpus(BaseCorpusContainer):
         self,
         data_path: Optional[str],
         tokenizer: BaseTokenizer,
-        word_vectors_container: BaseWordVectorsContainer,
+        embeddings_container: BaseEmbeddingsContainer,
         lemmatize: bool = True,
     ):
         self.data_path = data_path
         self.tokenizer = tokenizer
         self.lemmatize = lemmatize
-        self.word_vectors_container = word_vectors_container
+        self.embeddings_container = embeddings_container
         self.label_encoder = self.get_label_encoder()
 
     def get_label_encoder(self) -> LabelBinarizer:
@@ -62,7 +62,7 @@ class RusentimentCorpus(BaseCorpusContainer):
                     continue
                 encoded_label, *_ = self.label_encoder.transform([label])
                 tokens = self.tokenizer.split(text, lemmatize=self.lemmatize)
-                word_vectors = self.word_vectors_container.get_word_vectors(tokens)
+                word_vectors = self.embeddings_container.get_word_vectors(tokens)
                 if not any(vector.any() for vector in word_vectors):  # type: ignore
                     # FIXME: find better embeddings
                     encoded_label, *_ = self.label_encoder.transform([
