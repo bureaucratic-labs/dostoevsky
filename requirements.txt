@@ -1,6 +1,6 @@
 b-labs-models == 2017.8.22
 razdel==0.4.0
-gensim==3.7.3
+gensim==3.8.0
 Keras==2.2.4
 pymorphy2==0.8
 pytest==5.0.0
