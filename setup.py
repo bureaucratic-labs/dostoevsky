@@ -1,4 +1,3 @@
-# coding: utf-8
 from setuptools import (
     setup,
     find_packages,
@@ -12,7 +11,7 @@ def get_long_description() -> str:
 
 setup(
     name='dostoevsky',
-    version='0.2.0',
+    version='0.2.1',
     description='Sentiment analysis library for russian language',
     url='https://github.com/bureaucratic-labs/dostoevsky',
     author='Bureaucratic Labs',
@@ -27,6 +26,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: Implementation :: CPython',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Scientific/Engineering :: Information Analysis',
