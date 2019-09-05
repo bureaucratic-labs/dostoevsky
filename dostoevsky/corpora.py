@@ -11,7 +11,9 @@ from dostoevsky.embeddings import BaseEmbeddingsContainer
 
 class BaseCorpusContainer:
 
-    def get_prepared_data(self) -> Generator[Tuple[List[List[float]], List[int]], None, None]:
+    def get_prepared_data(self) -> Generator[
+        Tuple[List[List[float]], List[int]], None, None
+    ]:
         raise NotImplementedError
 
 

@@ -12,9 +12,62 @@ Please note that `Dostoevsky` supports only Python 3.6+
 $ pip install dostoevsky
 ```
 
-## Social networks comment model
+## Social network model [FastText]
 
-This model was trained on [RuSentiment dataset](https://github.com/text-machine-lab/rusentiment) and achieves up to ~0.70 F1 score  
+This model was trained on [RuSentiment dataset](https://github.com/text-machine-lab/rusentiment) and achieves up to ~0.71 F1 score.  
+Hyperparameters used for training:
+```
+epoch = 10
+lr = 0.21909
+dim = 64
+minCount = 1
+wordNgrams = 3
+minn = 2
+maxn = 5
+bucket = 259929
+dsub = 2
+loss = one-vs-all
+```
+
+### Usage
+
+First of all, you'll need to download binary model:
+
+```bash
+$ dostoevsky download fasttext-social-network-model
+```
+
+Then you can use sentiment analyzer:
+
+```python
+from dostoevsky.tokenization import RegexTokenizer
+from dostoevsky.models import FastTextSocialNetworkModel
+
+tokenizer = RegexTokenizer()
+tokens = tokenizer.split('всё очень плохо')  # [('всё', None), ('очень', None), ('плохо', None)]
+
+model = FastTextSocialNetworkModel(tokenizer=tokenizer)
+
+messages = [
+    'привет',
+    'я люблю тебя!!',
+    'малолетние дебилы'
+]
+
+results = model.predict(messages, k=2)
+
+for message, sentiment in zip(messages, results):
+    """
+    привет -> {'speech': 1.0000100135803223, 'skip': 0.0020607432816177607}
+    я люблю тебя!! -> {'positive': 0.9886782765388489, 'skip': 0.005394937004894018}
+    малолетние дебилы -> {'negative': 0.9525841474533081, 'neutral': 0.13661839067935944}]
+    """
+    print(message, '->', sentiment)
+```
+
+## Social network model [CNN]
+
+This model was trained on RuSentiment dataset too, but uses pretrained embeddings from RuSentiment dataset and achieves up to ~0.70 F1 score. Also, this model is implemented using Keras, so its possible to run on GPU.  
 ![](https://i.imgur.com/bGAEWvg.png)
 
 ### Usage
