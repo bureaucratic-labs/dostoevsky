@@ -68,7 +68,7 @@ class BaselineTokenizer(BaseTokenizer):
             (form.word, form.normal_form, form.tag)
             for form in self.morph.parse(token)
         ]
-        for (word, normal_form, tag) in forms:
+        for (_, normal_form, tag) in forms:
             if pos in tag:
                 text = normal_form
                 break

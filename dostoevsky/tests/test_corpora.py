@@ -1,9 +1,5 @@
-from keras.preprocessing.sequence import pad_sequences
-
-
 def test_rusentiment_corpus_get_prepared_data(
     rusentiment_corpus,
-    embeddings_container,
 ):
     X_train, y_train = [], []
     for i, (vectors, label) in enumerate(
@@ -14,6 +10,4 @@ def test_rusentiment_corpus_get_prepared_data(
         if i >= 9:
             break
     assert len(X_train) == len(y_train)
-    assert pad_sequences(X_train, maxlen=60).shape == (
-        10, 60, embeddings_container.dimension
-    )
+    assert X_train[0]

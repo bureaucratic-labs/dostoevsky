@@ -7,9 +7,6 @@ from dostoevsky.tokenization import (
     UDBaselineTokenizer,
     RegexTokenizer,
 )
-from dostoevsky.embeddings import (
-    Word2VecContainer,
-)
 from dostoevsky.corpora import RusentimentCorpus
 from dostoevsky.data import DataDownloader, DATA_BASE_PATH
 
@@ -48,22 +45,6 @@ def embeddings_path(data_downloader) -> str:
 
 
 @pytest.fixture(scope='session')
-def embeddings_dimension() -> int:
-    return 300
-
-
-@pytest.fixture(scope='session')
-def embeddings_container(embeddings_path, embeddings_dimension):
-    return Word2VecContainer(
-        model_path=embeddings_path,
-        dimension=embeddings_dimension,
-        append_pos=False,
-        binary=False,
-        limit=1000,
-    )
-
-
-@pytest.fixture(scope='session')
 def rusentiment_corpus_data(data_downloader):
     filesize: int = data_downloader.download(
         'corpora/rusentiment.tar.xz',
@@ -95,12 +76,10 @@ def rusentiment_baseline_tokenizer():
 def rusentiment_corpus(
     rusentiment_corpus_path,
     rusentiment_baseline_tokenizer,
-    embeddings_container,
 ):
     return RusentimentCorpus(
         data_path=rusentiment_corpus_path,
         tokenizer=rusentiment_baseline_tokenizer,
-        embeddings_container=embeddings_container,
     )
 
 
@@ -108,10 +87,8 @@ def rusentiment_corpus(
 def rusentiment_test_corpus(
     rusentiment_test_corpus_path,
     rusentiment_baseline_tokenizer,
-    embeddings_container,
 ):
     return RusentimentCorpus(
         data_path=rusentiment_test_corpus_path,
         tokenizer=rusentiment_baseline_tokenizer,
-        embeddings_container=embeddings_container,
     )
