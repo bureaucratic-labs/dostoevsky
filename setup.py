@@ -11,7 +11,7 @@ def get_long_description() -> str:
 
 setup(
     name='dostoevsky',
-    version='0.3.0',
+    version='0.4.0',
     description='Sentiment analysis library for russian language',
     url='https://github.com/bureaucratic-labs/dostoevsky',
     author='Bureaucratic Labs',
