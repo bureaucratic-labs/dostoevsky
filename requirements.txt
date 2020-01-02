@@ -4,4 +4,4 @@ fasttext==0.9.1
 pymorphy2==0.8
 pytest==5.3.2
 russian-tagsets==0.6
-scikit-learn==0.22
+scikit-learn==0.22.1
