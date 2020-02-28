@@ -11,7 +11,8 @@ STORAGE_BASE_URL: str = 'https://storage.b-labs.pro/'
 
 AVAILABLE_FILES: typing.Dict[str, typing.Tuple[str, str]] = {
     'cnn-social-network-model': ('models/cnn-social-network-model.tar.xz', 'models/cnn-social-network-model.tar.xz'),
-    'fasttext-social-network-model': ('models/fasttext-social-network-model.tar.xz', 'models/fasttext-social-network-model.tar.xz')
+    'fasttext-social-network-model': ('models/fasttext-social-network-model.tar.xz', 'models/fasttext-social-network-model.tar.xz'),
+    'fasttext-toxic-model': ('models/fasttext-toxic-model.tar.xz', 'models/fasttext-toxic-model.tar.xz'),
 }
 
 

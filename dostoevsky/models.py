@@ -40,6 +40,7 @@ class BaseModel:
     def get_raw_model(self):
         raise NotImplementedError
 
+
 class FastTextSocialNetworkModel(BaseModel):
     '''
     FastText model trained on RuSentiment dataset.
@@ -90,3 +91,17 @@ class FastTextSocialNetworkModel(BaseModel):
                 scores
             )) for labels, scores in Y
         ]
+
+
+class FastTextToxicModel(FastTextSocialNetworkModel):
+    '''
+    FastText model trained on russian toxic comments dataset.
+    '''
+
+    SENTENCE_LENGTH: Optional[int] = None
+
+    MODEL_PATH: str = os.path.join(
+        DATA_BASE_PATH,
+        'models/fasttext-toxic-model.bin'
+    )
+
