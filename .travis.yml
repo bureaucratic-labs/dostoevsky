@@ -33,3 +33,5 @@ install:
   - pip3 install -r requirements.txt
 script:
   - pytest -vv
+  - pip install -e .
+  - python -m dostoevsky --dry-run
