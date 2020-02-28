@@ -5,7 +5,7 @@ from setuptools import (
 
 
 def get_long_description() -> str:
-    with open('README.md') as source:
+    with open('README.md', encoding='utf-8') as source:
         return source.read()
 
 
