@@ -11,7 +11,7 @@ def get_long_description() -> str:
 
 setup(
     name='dostoevsky',
-    version='0.4.0',
+    version='0.5.0',
     description='Sentiment analysis library for russian language',
     url='https://github.com/bureaucratic-labs/dostoevsky',
     author='Bureaucratic Labs',
@@ -43,12 +43,12 @@ setup(
     },
     scripts=['bin/dostoevsky'],
     install_requires=[
-        'b-labs-models == 2017.8.22',
+        'b-labs-models==2017.8.22',
         'razdel==0.4.0',
         'fasttext==0.9.1',
         'pymorphy2==0.8',
-        'pytest==5.2.4',
+        'pytest==5.3.5',
         'russian-tagsets==0.6',
-        'scikit-learn==0.21.3',
+        'scikit-learn==0.22.1',
     ],
 )
