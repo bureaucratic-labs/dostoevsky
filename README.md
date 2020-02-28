@@ -1,4 +1,4 @@
-# Dostoevsky [![Build Status](https://travis-ci.org/bureaucratic-labs/dostoevsky.svg?branch=master)](https://travis-ci.org/bureaucratic-labs/dostoevsky) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbureaucratic-labs%2Fdostoevsky.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbureaucratic-labs%2Fdostoevsky?ref=badge_shield)
+# Dostoevsky [![Build Status](https://travis-ci.org/bureaucratic-labs/dostoevsky.svg?branch=master)](https://travis-ci.org/bureaucratic-labs/dostoevsky)
 
 <img align="right" src="https://i.imgur.com/uLMWPuL.png">
 
@@ -6,7 +6,7 @@ Sentiment analysis library for russian language
 
 ## Install
 
-Please note that `Dostoevsky` supports only Python 3.6+
+Please note that `Dostoevsky` supports only Python 3.6+ on both Linux and Windows
 
 ```bash
 $ pip install dostoevsky
@@ -15,26 +15,13 @@ $ pip install dostoevsky
 ## Social network model [FastText]
 
 This model was trained on [RuSentiment dataset](https://github.com/text-machine-lab/rusentiment) and achieves up to ~0.71 F1 score.  
-Hyperparameters used for training:
-```
-epoch = 10
-lr = 0.21909
-dim = 64
-minCount = 1
-wordNgrams = 3
-minn = 2
-maxn = 5
-bucket = 259929
-dsub = 2
-loss = one-vs-all
-```
 
 ### Usage
 
 First of all, you'll need to download binary model:
 
 ```bash
-$ dostoevsky download fasttext-social-network-model
+$ python -m dostoevsky download fasttext-social-network-model
 ```
 
 Then you can use sentiment analyzer:
@@ -57,10 +44,8 @@ messages = [
 results = model.predict(messages, k=2)
 
 for message, sentiment in zip(messages, results):
-    """
-    привет -> {'speech': 1.0000100135803223, 'skip': 0.0020607432816177607}
-    я люблю тебя!! -> {'positive': 0.9886782765388489, 'skip': 0.005394937004894018}
-    малолетние дебилы -> {'negative': 0.9525841474533081, 'neutral': 0.13661839067935944}]
-    """
+    # привет -> {'speech': 1.0000100135803223, 'skip': 0.0020607432816177607}
+    # люблю тебя!! -> {'positive': 0.9886782765388489, 'skip': 0.005394937004894018}
+    # малолетние дебилы -> {'negative': 0.9525841474533081, 'neutral': 0.13661839067935944}]
     print(message, '->', sentiment)
 ```
