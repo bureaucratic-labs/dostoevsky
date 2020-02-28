@@ -49,7 +49,7 @@ class RusentimentCorpus(BaseCorpusContainer):
     def get_prepared_data(self) -> Generator[Tuple[List[List[float]], List[int]], None, None]:
         if not self.data_path:
             raise ValueError('data_path is None')
-        with open(self.data_path) as source:
+        with open(self.data_path, encoding='utf8') as source:
             reader = csv.reader(
                 source,
                 delimiter=self.CSV_DELIMITER,
