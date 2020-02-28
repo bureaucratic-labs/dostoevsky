@@ -4,9 +4,7 @@ from typing import Generator, Optional, List, Tuple
 
 from sklearn.preprocessing import LabelBinarizer
 
-
 from dostoevsky.tokenization import BaseTokenizer
-from dostoevsky.embeddings import BaseEmbeddingsContainer
 
 
 class BaseCorpusContainer:
@@ -37,13 +35,11 @@ class RusentimentCorpus(BaseCorpusContainer):
         self,
         data_path: Optional[str],
         tokenizer: BaseTokenizer,
-        embeddings_container: BaseEmbeddingsContainer,
         lemmatize: bool = True,
     ):
         self.data_path = data_path
         self.tokenizer = tokenizer
         self.lemmatize = lemmatize
-        self.embeddings_container = embeddings_container
         self.label_encoder = self.get_label_encoder()
 
     def get_label_encoder(self) -> LabelBinarizer:
@@ -64,10 +60,4 @@ class RusentimentCorpus(BaseCorpusContainer):
                     continue
                 encoded_label, *_ = self.label_encoder.transform([label])
                 tokens = self.tokenizer.split(text, lemmatize=self.lemmatize)
-                word_vectors = self.embeddings_container.get_word_vectors(tokens)
-                if not any(vector.any() for vector in word_vectors):  # type: ignore
-                    # FIXME: find better embeddings
-                    encoded_label, *_ = self.label_encoder.transform([
-                        self.UNKNOWN_LABEL
-                    ])
-                yield word_vectors, encoded_label
+                yield tokens, encoded_label
