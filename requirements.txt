@@ -1,5 +1,5 @@
 b-labs-models == 2017.8.22
-razdel==0.4.0
+razdel==0.5.0
 fasttext==0.9.1
 pymorphy2==0.8
 pytest==5.4.1
