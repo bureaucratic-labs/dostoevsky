@@ -1,7 +1,7 @@
 b-labs-models == 2017.8.22
 razdel==0.5.0
 fasttext==0.9.2
-pymorphy2==0.9
+pymorphy2==0.9.1
 pytest==6.0.2
 russian-tagsets==0.6
 scikit-learn==0.23.2
