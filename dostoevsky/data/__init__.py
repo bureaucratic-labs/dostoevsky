@@ -1,5 +1,6 @@
 import os
 import lzma
+import ssl
 import typing
 import tarfile
 import urllib.request
@@ -26,7 +27,7 @@ class DataDownloader:
         url: str = os.path.join(STORAGE_BASE_URL, source)
         request = urllib.request.Request(url)
         request.add_header('User-Agent', self.USERAGENT)
-        response = urllib.request.urlopen(request)
+        response = urllib.request.urlopen(request, context=self._ssl_context())
         with open(destination_path, 'wb') as output:
             filesize: int = 0
             while source:
@@ -40,3 +41,10 @@ class DataDownloader:
             with tarfile.open(fileobj=f) as tar:
                 tar.extractall(os.path.dirname(destination_path))
         return filesize
+
+    @staticmethod
+    def _ssl_context() -> ssl.SSLContext:
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        return ctx
