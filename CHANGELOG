@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] - 2021-01-11
+
+### Fixed
+- Disabled HTTPS cert check that sometimes prevents model download (#105)
+- Removed non-fasttext code and dependencies (#96)
+
 ## [0.5.0] - 2020-02-28
 ### Added
 - fastText-based toxic comment model implementation (#53)

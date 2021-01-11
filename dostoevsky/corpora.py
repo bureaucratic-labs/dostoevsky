@@ -2,16 +2,11 @@ import csv
 
 from typing import Generator, Optional, List, Tuple
 
-from sklearn.preprocessing import LabelBinarizer
-
 from dostoevsky.tokenization import BaseTokenizer
 
 
 class BaseCorpusContainer:
-
-    def get_prepared_data(self) -> Generator[
-        Tuple[List[List[float]], List[int]], None, None
-    ]:
+    def get_prepared_data(self) -> Generator[Tuple[List[List[float]], List[int]], None, None]:
         raise NotImplementedError
 
 
@@ -42,7 +37,9 @@ class RusentimentCorpus(BaseCorpusContainer):
         self.lemmatize = lemmatize
         self.label_encoder = self.get_label_encoder()
 
-    def get_label_encoder(self) -> LabelBinarizer:
+    def get_label_encoder(self):
+        from sklearn.preprocessing import LabelBinarizer
+
         label_encoder = LabelBinarizer()
         return label_encoder.fit(self.LABELS)
 

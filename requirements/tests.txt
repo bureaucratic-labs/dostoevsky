@@ -1,0 +1,6 @@
+-r base.txt
+
+wheel
+pytest
+black
+scikit-learn==0.24.0
