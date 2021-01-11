@@ -33,8 +33,9 @@ matrix:
       env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
 install:
   - pip3 install --upgrade pip
-  - pip3 install -r requirements.txt
+  - pip3 install -r requirements/tests.txt
 script:
-  - pytest -vv
+  - black -S -l 120 --check dostoevsky/
+  - pytest -vv tests/
   - pip install -e .
   - python -m dostoevsky --dry-run

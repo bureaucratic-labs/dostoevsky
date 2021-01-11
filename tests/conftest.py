@@ -3,25 +3,13 @@ import pytest
 
 
 from dostoevsky.tokenization import (
-    BaselineTokenizer,
-    UDBaselineTokenizer,
     RegexTokenizer,
 )
 from dostoevsky.corpora import RusentimentCorpus
 from dostoevsky.data import DataDownloader, DATA_BASE_PATH
 
 
-@pytest.fixture
-def baseline_tokenizer():
-    return BaselineTokenizer()
-
-
-@pytest.fixture
-def ud_baseline_tokenizer():
-    return UDBaselineTokenizer()
-
-
-@pytest.fixture
+@pytest.fixture(scope='session')
 def regex_tokenizer():
     return RegexTokenizer()
 
@@ -68,27 +56,22 @@ def rusentiment_test_corpus_path(rusentiment_corpus_data):
 
 
 @pytest.fixture(scope='session')
-def rusentiment_baseline_tokenizer():
-    return UDBaselineTokenizer()
-
-
-@pytest.fixture(scope='session')
 def rusentiment_corpus(
     rusentiment_corpus_path,
-    rusentiment_baseline_tokenizer,
+    regex_tokenizer,
 ):
     return RusentimentCorpus(
         data_path=rusentiment_corpus_path,
-        tokenizer=rusentiment_baseline_tokenizer,
+        tokenizer=regex_tokenizer,
     )
 
 
 @pytest.fixture(scope='session')
 def rusentiment_test_corpus(
     rusentiment_test_corpus_path,
-    rusentiment_baseline_tokenizer,
+    regex_tokenizer,
 ):
     return RusentimentCorpus(
         data_path=rusentiment_test_corpus_path,
-        tokenizer=rusentiment_baseline_tokenizer,
+        tokenizer=regex_tokenizer,
     )
