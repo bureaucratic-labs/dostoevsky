@@ -2,5 +2,5 @@
 
 wheel
 pytest
-black
+black==20.8b1
 scikit-learn==0.24.0
