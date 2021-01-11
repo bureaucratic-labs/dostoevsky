@@ -1,6 +1,6 @@
 -r base.txt
 
-wheel
+wheel==0.36.2
 pytest
 black
 scikit-learn==0.24.0
