@@ -1,21 +1,18 @@
 import csv
-
-from typing import Generator, Optional, List, Tuple
-
-from dostoevsky.tokenization import BaseTokenizer
+from abc import ABC, abstractmethod
+from typing import Generator, List, Optional, Tuple
 
 
-class BaseCorpusContainer:
-    def get_prepared_data(self) -> Generator[Tuple[List[List[float]], List[int]], None, None]:
+class BaseCorpus(ABC):
+    @abstractmethod
+    def get_data(self) -> Generator[Tuple[str, str], None, None]:
         raise NotImplementedError
 
 
-class RusentimentCorpus(BaseCorpusContainer):
+class RusentimentCorpus(BaseCorpus):
 
     CSV_DELIMITER: str = ','
     CSV_QUOTECHAR: str = '"'
-
-    UNKNOWN_LABEL: str = 'unknown'
 
     LABELS: List[str] = [
         'positive',
@@ -23,27 +20,15 @@ class RusentimentCorpus(BaseCorpusContainer):
         'neutral',
         'skip',
         'speech',
-        UNKNOWN_LABEL,
     ]
 
     def __init__(
         self,
         data_path: Optional[str],
-        tokenizer: BaseTokenizer,
-        lemmatize: bool = True,
     ):
         self.data_path = data_path
-        self.tokenizer = tokenizer
-        self.lemmatize = lemmatize
-        self.label_encoder = self.get_label_encoder()
 
-    def get_label_encoder(self):
-        from sklearn.preprocessing import LabelBinarizer
-
-        label_encoder = LabelBinarizer()
-        return label_encoder.fit(self.LABELS)
-
-    def get_prepared_data(self) -> Generator[Tuple[List[List[float]], List[int]], None, None]:
+    def get_data(self) -> Generator[Tuple[str, str], None, None]:
         if not self.data_path:
             raise ValueError('data_path is None')
         with open(self.data_path, encoding='utf8') as source:
@@ -55,6 +40,4 @@ class RusentimentCorpus(BaseCorpusContainer):
             for i, (label, text) in enumerate(reader):
                 if i == 0:  # skip headers
                     continue
-                encoded_label, *_ = self.label_encoder.transform([label])
-                tokens = self.tokenizer.split(text, lemmatize=self.lemmatize)
-                yield tokens, encoded_label
+                yield text, label

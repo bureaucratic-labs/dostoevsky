@@ -1,10 +1,9 @@
-import os
 import lzma
+import os
 import ssl
-import typing
 import tarfile
+import typing
 import urllib.request
-
 
 DATA_BASE_PATH: str = os.path.dirname(os.path.abspath(__file__))
 STORAGE_BASE_URL: str = 'https://storage.b-labs.pro/'

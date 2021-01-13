@@ -1,21 +1,21 @@
 import os
-
-from typing import List, Dict, Optional
+from abc import ABC, abstractmethod
+from typing import Dict, List, Optional
 
 from fasttext import load_model as load_fasttext_model
 
-from dostoevsky.tokenization import BaseTokenizer
-from dostoevsky.corpora import BaseCorpusContainer
+from dostoevsky.corpora import BaseCorpus
 from dostoevsky.data import DATA_BASE_PATH
+from dostoevsky.tokenization import BaseTokenizer
 
 
-class BaseModel:
+class BaseModel(ABC):
     def __init__(
         self,
         tokenizer: BaseTokenizer,
         lemmatize: bool = True,
         model_path: Optional[str] = None,
-        corpus: Optional[BaseCorpusContainer] = None,
+        corpus: Optional[BaseCorpus] = None,
     ):
         self.model_path = model_path
         self.tokenizer = tokenizer
@@ -23,13 +23,15 @@ class BaseModel:
         self.corpus = corpus
         self.model = self.get_compiled_model() if self.model_path else self.get_raw_model()
 
+    @abstractmethod
     def get_compiled_model(self):
         raise NotImplementedError
 
     def preprocess_input(self, sentences: List[str]):
         raise NotImplementedError
 
-    def predict(self, sentences: List[str]):
+    @abstractmethod
+    def predict(self, sentences: List[str], **kwargs) -> List[Dict[str, float]]:
         raise NotImplementedError
 
     def get_raw_model(self):
@@ -63,7 +65,8 @@ class FastTextSocialNetworkModel(BaseModel):
             for sentence in sentences
         ]
 
-    def predict(self, sentences: List[str], k: int = -1) -> List[Dict[str, float]]:
+    def predict(self, sentences: List[str], **kwargs) -> List[Dict[str, float]]:
+        k = kwargs.get('k', -1)
         X = self.preprocess_input(sentences)
         Y = (self.model.predict(sentence, k=k) for sentence in X)
         return [dict(zip((label.replace('__label__', '') for label in labels), scores)) for labels, scores in Y]

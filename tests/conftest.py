@@ -1,12 +1,10 @@
 import os
+
 import pytest
 
-
-from dostoevsky.tokenization import (
-    RegexTokenizer,
-)
 from dostoevsky.corpora import RusentimentCorpus
-from dostoevsky.data import DataDownloader, DATA_BASE_PATH
+from dostoevsky.data import DATA_BASE_PATH, DataDownloader
+from dostoevsky.tokenization import RegexTokenizer
 
 
 @pytest.fixture(scope='session')
@@ -58,20 +56,16 @@ def rusentiment_test_corpus_path(rusentiment_corpus_data):
 @pytest.fixture(scope='session')
 def rusentiment_corpus(
     rusentiment_corpus_path,
-    regex_tokenizer,
 ):
     return RusentimentCorpus(
         data_path=rusentiment_corpus_path,
-        tokenizer=regex_tokenizer,
     )
 
 
 @pytest.fixture(scope='session')
 def rusentiment_test_corpus(
     rusentiment_test_corpus_path,
-    regex_tokenizer,
 ):
     return RusentimentCorpus(
         data_path=rusentiment_test_corpus_path,
-        tokenizer=regex_tokenizer,
     )

@@ -1,4 +1,4 @@
-from typing import List, Tuple, Optional
+from typing import List, Optional, Tuple
 
 
 def test_regex_tokenizer_base_case(regex_tokenizer):

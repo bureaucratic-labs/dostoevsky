@@ -2,8 +2,7 @@ import os
 import sys
 import typing
 
-from dostoevsky.data import DataDownloader, DATA_BASE_PATH, AVAILABLE_FILES
-
+from dostoevsky.data import AVAILABLE_FILES, DATA_BASE_PATH, DataDownloader
 
 if __name__ == '__main__':
     if '--dry-run' in sys.argv:
