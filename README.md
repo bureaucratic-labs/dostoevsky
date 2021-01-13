@@ -1,4 +1,4 @@
-# Dostoevsky [![Build Status](https://travis-ci.org/bureaucratic-labs/dostoevsky.svg?branch=master)](https://travis-ci.org/bureaucratic-labs/dostoevsky)
+# Dostoevsky ![Test & Lint](https://github.com/bureaucratic-labs/dostoevsky/workflows/Test%20&%20Lint/badge.svg?branch=master)
 
 <img align="right" src="https://i.imgur.com/uLMWPuL.png">
 
