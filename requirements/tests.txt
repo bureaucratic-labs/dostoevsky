@@ -2,7 +2,7 @@
 
 wheel==0.36.2
 pytest==6.2.3
-black==21.4b1
+black==21.4b2
 scikit-learn==0.24.2
 isort==5.8.0
 mypy==0.812
