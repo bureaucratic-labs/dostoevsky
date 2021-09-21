@@ -1,7 +1,5 @@
 # Dostoevsky ![Test & Lint](https://github.com/bureaucratic-labs/dostoevsky/workflows/Test%20&%20Lint/badge.svg?branch=master)
 
-<img align="right" src="https://i.imgur.com/uLMWPuL.png">
-
 Sentiment analysis library for russian language
 
 ## Install
