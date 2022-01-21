@@ -52,7 +52,12 @@ for message, sentiment in zip(messages, results):
 
 * 🇷🇺 [Dostoevsky — анализ тональности в Python за 5 минут](https://egorovegor.ru/analiz-tonalnosti-s-python-i-dostoevsky/)
 * 🇷🇺 [Семантический анализ мнений о поправках к Конституции на основе данных ВКонтакте ](https://leftjoin.ru/all/constitution-sentiment-analysis/)
+* 🇷🇺 [Как писать посты в стиле Артемия Лебедева? Подробный анализ телеграм-канала и кое-что еще](https://habr.com/ru/post/596035/)
 * 🇺🇸 [Sentiment analysis of Russians on Constitutional Amendments](https://www.valiotti.com/leftjoin/all/sentiment-analysis-of-russians-on-constitutional-amendments/)
+
+Feel free to extend this list with your article! ✨
+
+## Citation
 
 If you use the library in a research project, please include the following citation for the RuSentiment data:
 ```
