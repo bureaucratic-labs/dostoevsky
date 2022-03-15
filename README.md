@@ -4,7 +4,7 @@ Sentiment analysis library for russian language
 
 ## Install
 
-Please note that `Dostoevsky` supports only Python 3.6+ on both Linux and Windows
+Please note that `Dostoevsky` supports only Python 3.7+ on both Linux and Windows
 
 ```bash
 $ pip install dostoevsky
