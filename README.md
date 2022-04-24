@@ -57,6 +57,10 @@ for message, sentiment in zip(messages, results):
 
 Feel free to extend this list with your article! ✨
 
+## Related projects
+
+* [David Dale](https://github.com/avidale) BERT-based models for [emotion detection](https://huggingface.co/cointegrated/rubert-tiny2-cedr-emotion-detection?text=%D0%93%D1%80%D1%83%D1%81%D1%82%D1%8C-%D1%82%D0%BE%D1%81%D0%BA%D0%B0+%D0%BC%D0%B5%D0%BD%D1%8F+%D1%81%D1%8A%D0%B5%D0%B4%D0%B0%D0%B5%D1%82) and [classification of toxicity](https://huggingface.co/cointegrated/rubert-tiny-toxicity)
+
 ## Citation
 
 If you use the library in a research project, please include the following citation for the RuSentiment data:
