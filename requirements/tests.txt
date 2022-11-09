@@ -1,6 +1,6 @@
 -r base.txt
 
-wheel==0.38.2
+wheel==0.38.3
 pytest==7.2.0
 black==22.10.0
 isort==5.10.1
