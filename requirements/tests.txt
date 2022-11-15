@@ -4,4 +4,4 @@ wheel==0.38.4
 pytest==7.2.0
 black==22.10.0
 isort==5.10.1
-mypy==0.990
+mypy==0.991
