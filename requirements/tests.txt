@@ -1,7 +1,7 @@
 -r base.txt
 
 wheel==0.38.4
-pytest==7.2.1
+pytest==7.3.0
 black==22.12.0
 isort==5.11.4
 mypy==1.2.0
